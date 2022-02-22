@@ -21,6 +21,7 @@ class wordleSolve {
             case 3: threeLetter(arrlst, newWords);    break; 
             case 4: fourLetter(arrlst, newWords);     break; 
         }
+        removeLetter(arrlst, newWords);
     }
 
     public static void removeLetter(ArrayList<String> arrlst, ArrayList<String> newWords) { 
@@ -31,12 +32,11 @@ class wordleSolve {
         String num = scan.nextLine(); 
         int n = Integer.parseInt(num); 
         System.out.println("What letters will not work?"); 
-        String[] arrNot = new String[n+1]; 
+        String[] arrNot = new String[n]; 
         ArrayList<String> toRemove = new ArrayList<>(); 
         for(int i = 0; i < arrNot.length; i++) { 
             arrNot[i] = scan.nextLine(); 
         }
-        scan.close(); 
         for(String i : newWords) { 
             for(String j : arrNot) { 
                 if(i.contains(j)) { 
@@ -55,8 +55,7 @@ class wordleSolve {
                 newWords.add(s); 
             }
         }
-        scan.close(); 
-        removeLetter(arrlst, newWords); 
+        //removeLetter(arrlst, newWords); 
     }
 
     public static void twoLetter(ArrayList<String> arrlst, ArrayList<String> newWords) { 
@@ -69,8 +68,7 @@ class wordleSolve {
                 newWords.add(s);  
             }
         }
-        scan.close(); 
-        removeLetter(arrlst, newWords);
+        //removeLetter(arrlst, newWords);
     }
 
     public static void threeLetter(ArrayList<String> arrlst, ArrayList<String> newWords) { 
@@ -83,8 +81,7 @@ class wordleSolve {
                 newWords.add(s); 
             }
         }
-        scan.close(); 
-        removeLetter(arrlst, newWords);
+        //removeLetter(arrlst, newWords);
     }
 
     public static void fourLetter(ArrayList<String> arrlst, ArrayList<String> newWords) { 
@@ -97,8 +94,7 @@ class wordleSolve {
                 newWords.add(s); 
             }
         }
-        scan.close(); 
-        removeLetter(arrlst, newWords);
+        //removeLetter(arrlst, newWords);
     }
 
     public static void main(String[] args) throws FileNotFoundException { 
