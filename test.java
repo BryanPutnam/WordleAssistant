@@ -1,7 +1,0 @@
-package Java;
-
-
-class test { 
-
-
-}
