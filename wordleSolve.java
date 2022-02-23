@@ -3,18 +3,19 @@ package Java;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 class wordleSolve {  
 
+    static final String breaker = "**********************************************************"; 
     public static Scanner scan = new Scanner(System.in); 
 
-    public static void numLetter(ArrayList<String> arrlst) { 
-        System.out.println("How many letters do you know are in the word?"); 
+    public static void numLetter(ArrayList<String> arrlst, ArrayList<String> newWords) { 
+        System.out.println(breaker + "\nHow many letters do you know are in the word?"); 
         String input1 = scan.nextLine(); 
         int x = Integer.parseInt(input1); 
-        System.out.println("What letters do you know?");
-        ArrayList<String> newWords = new ArrayList<>();
+        System.out.println(breaker + "\nWhat letters do you know?");
         switch(x) { 
             case 1: oneLetter(arrlst, newWords);      break; 
             case 2: twoLetter(arrlst, newWords);      break; 
@@ -25,13 +26,10 @@ class wordleSolve {
     }
 
     public static void removeLetter(ArrayList<String> arrlst, ArrayList<String> newWords) { 
-        System.out.println("How many letters will not work?");
-        if (!scan.hasNextLine()) { 
-            System.out.println("no next line"); 
-        }
+        System.out.println(breaker + "\nHow many letters will not work?");
         String num = scan.nextLine(); 
         int n = Integer.parseInt(num); 
-        System.out.println("What letters will not work?"); 
+        System.out.println(breaker + "\nWhat letters will not work?"); 
         String[] arrNot = new String[n]; 
         ArrayList<String> toRemove = new ArrayList<>(); 
         for(int i = 0; i < arrNot.length; i++) { 
@@ -45,7 +43,13 @@ class wordleSolve {
             }
         }
         newWords.removeAll(toRemove); 
-        System.out.println(newWords); 
+        System.out.println(breaker + "\nYour list of possible words: \n"); 
+        System.out.println(newWords + "\n"); 
+        System.out.println("Do you need more hints? (Type 'Y' for Yes or 'N' for No)"); 
+        String choice = scan.nextLine(); 
+        if (choice.toLowerCase().equals("y")){ 
+            numLetter(arrlst, newWords);
+        }
     }
 
     public static void oneLetter(ArrayList<String> arrlst, ArrayList<String> newWords) { 
@@ -55,7 +59,6 @@ class wordleSolve {
                 newWords.add(s); 
             }
         }
-        //removeLetter(arrlst, newWords); 
     }
 
     public static void twoLetter(ArrayList<String> arrlst, ArrayList<String> newWords) { 
@@ -68,7 +71,6 @@ class wordleSolve {
                 newWords.add(s);  
             }
         }
-        //removeLetter(arrlst, newWords);
     }
 
     public static void threeLetter(ArrayList<String> arrlst, ArrayList<String> newWords) { 
@@ -81,7 +83,6 @@ class wordleSolve {
                 newWords.add(s); 
             }
         }
-        //removeLetter(arrlst, newWords);
     }
 
     public static void fourLetter(ArrayList<String> arrlst, ArrayList<String> newWords) { 
@@ -94,15 +95,18 @@ class wordleSolve {
                 newWords.add(s); 
             }
         }
-        //removeLetter(arrlst, newWords);
     }
 
     public static void main(String[] args) throws FileNotFoundException { 
-        Scanner fileScan = new Scanner(new File("/Users/bryanputnam/Desktop/School/VSC_Files/Java/wordle.txt"));  
-        ArrayList<String> arrlst = new ArrayList<>(); 
+        //Scanner fileScan = new Scanner(new File("/Users/bryanputnam/Desktop/School/VSC_Files/Java/wordle.txt"));  // Wordle Official List 
+
+        Scanner fileScan = new Scanner(new File("/Users/bryanputnam/Desktop/School/VSC_Files/Java/allWords.txt"));
+        ArrayList<String> arrlst = new ArrayList<>();
+        ArrayList<String> newWords = new ArrayList<>(); 
         while (fileScan.hasNext()) { 
             arrlst.add(fileScan.next()); 
         }
-        numLetter(arrlst);
+        Collections.sort(arrlst); 
+        numLetter(arrlst, newWords);
     }
 }
